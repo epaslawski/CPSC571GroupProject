@@ -38,5 +38,6 @@ def contagious_rating(age):
     else:
         return 6
 
-def generate_residents(population, avg_household_size, pop_density, employment_rate):
+def generate_residents(population, age_0_4, age_5_9, age_10_14, age_15_19, age_20_64,\
+                        age_65, avg_household_size, pop_density, emp_rate, worked):
     return []

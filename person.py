@@ -8,6 +8,8 @@ class Person:
         self.contagious_rating = contagious_rating(age)
         self.household = generate_household(division)
         self.workplace = generate_workplace(division)
+        self.days_infectious = 10               # number of days this person is infectious
+        
     
     
     
