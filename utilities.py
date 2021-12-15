@@ -1,13 +1,15 @@
 from random import randint
 
 
-def generate_workplace(division):
-    start, end = division.workplaces
-    return randint(start,end)
+def generate_workplace(workplaces):
+    start, end = workplaces
+    return randint(start,end+1)
 
-def generate_household(division):
-    start, end = division.households
-    return randint(start,end)
+
+def generate_household(households):
+    start, end = households
+    return randint(start,end+1)
+
 
 def contagious_rating(age):
 
@@ -24,8 +26,6 @@ def contagious_rating(age):
     else:
         return 6
 
-def generate_residents(population, age_0_4, age_5_9, age_10_14, age_15_19, age_20_64,\
-                        age_65, avg_household_size, pop_density, emp_rate, worked):
-    return []
+
 
 
