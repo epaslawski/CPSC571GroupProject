@@ -1,16 +1,9 @@
 from random import randint
 
-#workplaces account for inter-division employees
+
 def generate_workplace(division):
-    match division:
-        case "d1":
-            return randint(0,100)
-        case "d2":
-            return randint(80,200)
-        case "d3":
-            return randint(180,300)
-        case _:
-            return "something is wrong"
+    start, end = division.workplaces
+    return randint(start,end)
 
 def generate_household(division):
     match division:
@@ -41,3 +34,5 @@ def contagious_rating(age):
 def generate_residents(population, age_0_4, age_5_9, age_10_14, age_15_19, age_20_64,\
                         age_65, avg_household_size, pop_density, emp_rate, worked):
     return []
+
+
