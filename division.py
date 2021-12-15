@@ -6,7 +6,7 @@ class Division:
 
     def __init__(self, name, population, age_0_4, age_5_9, age_10_14,\
                                         age_15_19, age_20_64, age_65, avg_household_size,\
-                                        pop_density, emp_rate, workplaces, households):
+                                        pop_density, emp_rate, workplaces, households, residents):
         self.name = name
         self.population = population
         self.age_0_4 = age_0_4
@@ -20,7 +20,7 @@ class Division:
         self.emp_rate = emp_rate
         self.workplaces = workplaces  
         self.households = households    
-        self.residents = generate_residents(name, emp_rate, workplaces, households, age_0_4, age_5_9, age_10_14, age_15_19, age_20_64, age_65)
+        self.residents = residents
         
 
 
@@ -28,8 +28,8 @@ class Division:
 
 def initialize_divisons():
     '''
-    This method returns a list of divisions.
-    All divisions from the data are parsed and initialized inside this method.
+    This function returns a list of divisions.
+    All divisions from the data file are parsed and initialized inside this function.
     '''
 
     divisions = [] 
@@ -69,10 +69,12 @@ def initialize_divisons():
             households = (h_start,h_end)
             h_start = h_end + 1
 
+            residents = generate_residents(name, emp_rate, workplaces, households, age_0_4, age_5_9, age_10_14, age_15_19, age_20_64, age_65)
+
 
             divisions.append(Division(name, population, age_0_4, age_5_9, age_10_14,\
                                         age_15_19, age_20_64, age_65, avg_household_size,\
-                                        pop_density, emp_rate, workplaces, households ))
+                                        pop_density, emp_rate, workplaces, households, residents ))
             
             
     return divisions
@@ -83,7 +85,10 @@ def initialize_divisons():
 
 def generate_residents(name, emp_rate, workplaces, households, age_0_4, age_5_9, age_10_14, age_15_19, age_20_64, age_65):
 
-    #age, works, household, workplace, division
+    '''
+    This is a helper function for initialize_divisions().
+    It generates and returns a list of residents(people) in a division.
+    '''
 
     residents = []
 
