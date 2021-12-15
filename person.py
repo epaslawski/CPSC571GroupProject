@@ -7,6 +7,7 @@ class Person:
         self.household = household
         self.workplace = workplace
         self.division = division
+        self.infected = False
         
    
     
