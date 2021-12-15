@@ -64,7 +64,7 @@ def initialize_divisons():
     return divisions
 
 
-def get_total_pop():
+def get_total_workplaces():
 
     total_workplaces = 0
 
