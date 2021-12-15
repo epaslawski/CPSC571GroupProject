@@ -7,6 +7,7 @@ class Person:
         self.household = household  # specific household they belong to (int)
         self.workplace = workplace  # specific workplace they belong to (int)
         self.division = division    # integer value in 1-19 representing division
+        self.contagious_rating = 0  # to be calculated prior to entering classifier (in Clasifier class)
         self.infected = False       # label for infected or not
         
    
