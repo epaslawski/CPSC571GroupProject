@@ -26,35 +26,41 @@ class Division:
         return self.residents
 
 
-divisions = []
-
-with open('data.csv', mode='r') as data_file:
-
-    csv_reader = csv.DictReader(data_file)
-    line_count = 0
-    for row in csv_reader:
-        if line_count == 0:
-            print(f'{", ".join(row)}')
-            line_count += 1
-        else:
-            name = row["Division"]
-            population = row["Population"]
-            age_0_4 = row["0-4"]
-            age_5_9 = row["5-9"]
-            age_10_14 = row["10-14"]
-            age_15_19 = row["15-19"]
-            age_20_64 = row["20-64"]
-            age_65 = row["65+"]
-            avg_household_size = row["Average Household Size"]
-            pop_density = row["Population density"]
-            emp_rate = row["Employment Rate"]
-            worked = row["Worked at usual place"]
-            divisions.append(Division(name, population, age_0_4, age_5_9, age_10_14,\
-                                        age_15_19, age_20_64, age_65, avg_household_size,\
-                                        pop_density, emp_rate, worked ))
-            
 
 
+
+def initialize_divisons():
+    '''
+    This method returns a list of divisions.
+    All divisions from the data are parsed and initialized inside this method.
+    '''
+
+    divisions = []
+
+    with open('data.csv', mode='r') as data_file:
+
+        csv_reader = csv.DictReader(data_file)
+        line_count = 0
+        for row in csv_reader:
+            if line_count == 0:
+                print(f'{", ".join(row)}')
+                line_count += 1
+            else:
+                name = row["Division"]
+                population = row["Population"]
+                age_0_4 = row["0-4"]
+                age_5_9 = row["5-9"]
+                age_10_14 = row["10-14"]
+                age_15_19 = row["15-19"]
+                age_20_64 = row["20-64"]
+                age_65 = row["65+"]
+                avg_household_size = row["Average Household Size"]
+                pop_density = row["Population density"]
+                emp_rate = row["Employment Rate"]
+                worked = row["Worked at usual place"]
+                divisions.append(Division(name, population, age_0_4, age_5_9, age_10_14,\
+                                            age_15_19, age_20_64, age_65, avg_household_size,\
+                                            pop_density, emp_rate, worked ))               
+    return divisions
             
         
-print(divisions[1].get_residents())
