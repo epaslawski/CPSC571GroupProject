@@ -6,15 +6,8 @@ def generate_workplace(division):
     return randint(start,end)
 
 def generate_household(division):
-    match division:
-        case "d1":
-            return randint(0,100)
-        case "d2":
-            return randint(101,200)
-        case "d3":
-            return randint(201,300)
-        case _:
-            return "something is wrong"
+    start, end = division.households
+    return randint(start,end)
 
 def contagious_rating(age):
 
