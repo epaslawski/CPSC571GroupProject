@@ -26,7 +26,7 @@ class Division:
 
 
 
-def initialize_divisons():
+def initialize_divisions():
     '''
     This function returns a list of divisions.
     All divisions from the data file are parsed and initialized inside this function.
