@@ -1,4 +1,4 @@
-from utilities import generate_workplace, generate_household
+from utilities import *
 from person import *
 import csv
 
@@ -69,7 +69,7 @@ def initialize_divisions():
             households = (h_start,h_end)
             h_start = h_end + 1
 
-            residents = generate_residents(name, emp_rate, workplaces, households, age_0_4, age_5_9, age_10_14, age_15_19, age_20_64, age_65)
+            residents = generate_residents(name, emp_rate, workplaces, households, age_0_4, age_5_9, age_10_14, age_15_19, age_20_64, age_65, pop_density)
 
 
             divisions.append(Division(name, population, age_0_4, age_5_9, age_10_14,\
@@ -83,7 +83,7 @@ def initialize_divisions():
 
 
 
-def generate_residents(name, emp_rate, workplaces, households, age_0_4, age_5_9, age_10_14, age_15_19, age_20_64, age_65):
+def generate_residents(name, emp_rate, workplaces, households, age_0_4, age_5_9, age_10_14, age_15_19, age_20_64, age_65, pop_density):
 
     '''
     This is a helper function for initialize_divisions().
@@ -94,38 +94,38 @@ def generate_residents(name, emp_rate, workplaces, households, age_0_4, age_5_9,
 
     working20 = int((age_20_64*emp_rate)//1)
     working65 = int((age_65*emp_rate)//1)
+    
 
     for i in range(age_0_4):
-        residents.append(Person(0, False, generate_household(households), 0, name))
+        residents.append(Person(0, False, generate_household(households), 0, name, contagious_rating(0, pop_density)))
     
     for i in range(age_5_9):
-        residents.append(Person(1, False, generate_household(households), 0, name))
+        residents.append(Person(1, False, generate_household(households), 0, name, contagious_rating(1, pop_density)))
 
     for i in range(age_10_14):
-        residents.append(Person(2, False, generate_household(households), 0, name))
+        residents.append(Person(2, False, generate_household(households), 0, name, contagious_rating(2, pop_density)))
     
     for i in range(age_15_19):
-        residents.append(Person(3, False, generate_household(households), 0, name))
+        residents.append(Person(3, False, generate_household(households), 0, name, contagious_rating(3, pop_density)))
     
     for a in range(working20+1):
-        residents.append(Person(4, True, generate_household(households), generate_workplace(workplaces), name))
+        residents.append(Person(4, True, generate_household(households), generate_workplace(workplaces), name, contagious_rating(4, pop_density)))
         
     for b in range(age_20_64-working20+1):
-        residents.append(Person(4, False, generate_household(households), 0, name))
+        residents.append(Person(4, False, generate_household(households), 0, name, contagious_rating(4, pop_density)))
 
     for a in range(working65+1):
-        residents.append(Person(5, True, generate_household(households), generate_workplace(workplaces), name))
+        residents.append(Person(5, True, generate_household(households), generate_workplace(workplaces), name, contagious_rating(5, pop_density)))
         
     for b in range(age_65-working65+1):
-        residents.append(Person(5, False, generate_household(households), 0, name))
+        residents.append(Person(5, False, generate_household(households), 0, name, contagious_rating(5, pop_density)))
     
     return residents
 
-
 '''
-ds = initialize_divisons()
+ds = initialize_divisions()
 
 for d in ds:
-    print(d.name, '\t',len(d.residents))
+    print(d.name, '\t',len(d.residents), '\t', d.residents[5].contagious_rating)
 
 '''

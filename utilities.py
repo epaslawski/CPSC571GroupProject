@@ -11,20 +11,20 @@ def generate_household(households):
     return randint(start,end+1)
 
 
-def contagious_rating(age):
+def contagious_rating(age, pop_density):
 
-    if age <= 4 :
-        return 1
-    elif 5 <= age <= 9:
-        return 2
-    elif 10 <= age <= 14:
-        return 3
-    elif 15 <= age <= 19:
-        return 4
-    elif 20 <= age <= 64:
-        return 5
-    else:
-        return 6
+    
+    if age == 0 or age == 1:
+        rating = 1
+    elif age == 2:
+        rating = 2
+    elif age == 3 or age == 4:
+        rating = 3
+    elif age == 5:
+        rating = 2
+    
+
+    return rating*pop_density
 
 
 
