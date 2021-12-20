@@ -3,52 +3,86 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
 from random import randint
+from person import *
 
-# Headings for the .csv file containing the sample
-col_names = ['contagious_rating', 'household_size', 'workplace_size', 'infected']
+def classifier(random_people: list[Person], people_to_be_tested: list[Person]):
 
-sick = pd.read_csv("sample.csv", header=None, names=col_names)
+    '''
+    This function takes two inputs,   
+        1. list of randomly selected people for training the classifier (testing data)
+        2. list of people to be tested (training data)
+    and ouputs the updated list of tested people
+    '''
 
-# Columns that affect the decision tree
-feature_cols = ['contagious_rating', 'household_size', 'workplace_size']
-X = sick[feature_cols]
-# The column that we are interested in, ie. if a person is infected or not
-y = sick.infected
+    training_data = random_people
+    testing_data = people_to_be_tested
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1)
+    train_age = []
+    train_works = []
+    train_hh = []
+    train_wp = []
+    train_div = []
+    train_cr = []
+    train_if = []
 
-dtree = DecisionTreeClassifier()
-dtree = dtree.fit(X_train.values, y_train)
+    for p in training_data:
+        
+        train_age.append(p.age)
+        train_works .append(p.works)
+        train_hh.append(p.household)
+        train_wp.append(p.workplace)
+        train_div.append(p.division)
+        train_cr.append(p.contagious_rating)
+        train_if.append(p.infected)
 
-#y_pred = dtree.predict(X_test)
-#print(y_pred)
-#print("Accuracy: ", metrics.accuracy_score(y_test, y_pred))
+    feature_vec = list(zip(train_age,train_works,train_hh,train_wp,train_div,train_cr))
+    x_train = pd.DataFrame(feature_vec, columns =['age', 'works', 'household', 'workplace', 'division', 'contagious_rating'])
+    y_train = pd.DataFrame(train_if, columns =['infected'])
 
-# The amount of people to be in the community
-print("Specify how many people: ")
-people = int(input())
+    test_age = []
+    test_works = []
+    test_hh = []
+    test_wp = []
+    test_div = []
+    test_cr = []
+    test_if = []
 
-# Preparing a data frame
-myDict = {}
-myDict["contagious_rating"] = []
-myDict["household_size"] = []
-myDict["workplace_size"] = []
-myDict["infected"] = []
+    for p in testing_data:
+        
+        test_age.append(p.age)
+        test_works .append(p.works)
+        test_hh.append(p.household)
+        test_wp.append(p.workplace)
+        test_div.append(p.division)
+        test_cr.append(p.contagious_rating)
+        test_if.append(p.infected)
 
-# Populating the data frame
-for x in range(people):
-    c_rating = randint(1,6)
-    h_size = randint(1,8)
-    w_size = randint(1,200)
-    is_infected = dtree.predict([[c_rating, h_size, w_size]])
-    #print(is_infected[0])
-    myDict["contagious_rating"].append(c_rating)
-    myDict["household_size"].append(h_size)
-    myDict["workplace_size"].append(w_size)
-    myDict["infected"].append(is_infected[0])
+    feature_vec = list(zip(test_age,test_works,test_hh,test_wp,test_div,test_cr))
+    x_test = pd.DataFrame(feature_vec, columns =['age', 'works', 'household', 'workplace', 'division', 'contagious_rating'])
+    y_test = pd.DataFrame(test_if, columns =['infected'])
 
-print(myDict)
 
-# Output the dataframe into a csv file 
-df = pd.DataFrame(myDict)
-df.to_csv('tree_output.csv', index=False)
+    dtree = DecisionTreeClassifier()
+    dtree = dtree.fit(x_train, y_train)
+
+    y_pred = dtree.predict(x_test)
+
+    for i in range(len(y_pred)):
+        testing_data[i].infected = y_pred[i]
+
+
+    return testing_data
+
+
+
+'''
+random = [Person(1,0,3,4,1,4), Person(2,1,5,1,1,5), Person(3,0,3,3,3,3)]
+to_be_tested = [Person(1,0,3,4,1,4), Person(2,1,5,1,1,5)]
+
+random[1].infected = True
+
+updated = classifier(random, to_be_tested)
+
+for p in updated:
+    print(p.infected)
+'''
