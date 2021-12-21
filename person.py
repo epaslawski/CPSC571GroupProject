@@ -9,6 +9,8 @@ class Person:
         self.division = division    # integer value in 1-19 representing division
         self.contagious_rating = contagious_rating  # calculated during initialization (float)
         self.infected = False       # label for infected or not
+        self.days_infected = 0      # counts infected days
+        self.recovered = False      # if they had the disease but are now recovered, they will not get reinfected.
         
    
     

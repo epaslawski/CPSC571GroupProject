@@ -47,6 +47,9 @@ def run_day(div, day):
     for per in div.residents:
         if per.infected == True:
             active += 1
+            per.days_infected =+ 1
+        if per.days_infected > 10:
+            per.infected == False
     return [name, day, active,res_total]
 
 def main():
