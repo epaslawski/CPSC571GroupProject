@@ -9,16 +9,32 @@ from .utilities import *
 import csv
 
 
-def run_day(division) -> list[str]:
+def run_day(div) -> list[str]:
+    
+    name = div.name
+    res_total = len(div.residents)
+    random.shuffle(div.residents)
+    num_test = (res_total * 17) // 100 # 1/6 of population
     # create test list
-
-
+    test_list = []
     # create training list
+    training_list = []
+
+    for x in range (0,res_total):
+        per = div.residents[x]
+
+        if len(test_list) < num_test:
+            if (per.infected == False):
+                test_list.append(per)
+            else:
+                training_list.append(per)
+        else:
+            training_list.append(per)
 
 
     # run classifier
 
-
+    classifier_out = classifier(test_list, training_list)
     #return data list to add to csv
 
 def main():
