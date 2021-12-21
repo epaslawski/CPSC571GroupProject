@@ -9,7 +9,7 @@ from .utilities import *
 import csv
 
 
-def run_day(div) -> list[str]:
+def run_day(div, day) -> list:
     
     name = div.name
     res_total = len(div.residents)
@@ -33,16 +33,21 @@ def run_day(div) -> list[str]:
 
 
     # run classifier
-
     classifier_out = classifier(test_list, training_list)
     #return data list to add to csv
+    active = 0
+
+    for per in div.residents:
+        if per.infected == True:
+            active += 1
+    return [name, x, active,res_total]
 
 def main():
     # create divisions and populations
     ds = initialize_divisions()
 
     # create output csv
-    headers = ['division', 'day', 'active_cases', 'recovered']
+    headers = ['division', 'day', 'active_cases', 'population']
 
     sim_days = int(input("How many days to run the simulator: "))
 
@@ -54,7 +59,7 @@ def main():
 
         for x in range(0,sim_days):
             for div in ds:
-                data = run_day(div)
+                data = run_day(div, x)
                 writer.writerow(data)
 
     
