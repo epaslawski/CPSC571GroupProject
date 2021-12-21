@@ -1,6 +1,7 @@
 from utilities import *
 from person import *
 import csv
+import random 
 
 class Division:
 
@@ -26,7 +27,7 @@ class Division:
 
 
 
-def initialize_divisions():
+def initialize_divisions(init_infection_pct):
     '''
     This function returns a list of divisions.
     All divisions from the data file are parsed and initialized inside this function.
@@ -69,7 +70,9 @@ def initialize_divisions():
             households = (h_start,h_end)
             h_start = h_end + 1
 
-            residents = generate_residents(name, emp_rate, workplaces, households, age_0_4, age_5_9, age_10_14, age_15_19, age_20_64, age_65, pop_density)
+            num_infected = (population*init_infection_pct ) // 100
+
+            residents = generate_residents(num_infected, name, emp_rate, workplaces, households, age_0_4, age_5_9, age_10_14, age_15_19, age_20_64, age_65, pop_density)
 
 
             divisions.append(Division(name, population, age_0_4, age_5_9, age_10_14,\
@@ -83,11 +86,13 @@ def initialize_divisions():
 
 
 
-def generate_residents(name, emp_rate, workplaces, households, age_0_4, age_5_9, age_10_14, age_15_19, age_20_64, age_65, pop_density):
+def generate_residents(num_infected, name, emp_rate, workplaces, households, age_0_4, age_5_9, age_10_14, age_15_19, age_20_64, age_65, pop_density):
 
     '''
     This is a helper function for initialize_divisions().
     It generates and returns a list of residents(people) in a division.
+
+    It also randomly infects a percentage of the population.
     '''
 
     residents = []
@@ -120,6 +125,16 @@ def generate_residents(name, emp_rate, workplaces, households, age_0_4, age_5_9,
     for b in range(age_65-working65+1):
         residents.append(Person(5, False, generate_household(households), 0, name, contagious_rating(5, pop_density)))
     
+
+    random.shuffle(residents)
+
+    for x in range (0,num_infected):
+        residents[x].infected = True
+
+    infected = 0
+    for per in residents:
+        if per.infected == True:
+            infected+=1
     return residents
 
 '''
