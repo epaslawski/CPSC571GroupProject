@@ -2,6 +2,14 @@
 
 This project is a Python and Jupyter Notebook program that simulates disease spread based on input parameters and Alberta census data.
 
+Created: December 2021
+
+## Authors
+
+Erin Paslawski 
+Peter Nguyen 
+Bohyeon Cha 
+
 ## Installation
 
 To run the Jupyter Visualization program, Jupyter needs to be installed either as an IDE package, or locally with JupyterHub.
