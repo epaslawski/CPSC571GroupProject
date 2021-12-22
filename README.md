@@ -17,17 +17,18 @@ pip install sklearn
 
 ## Usage
 
-#Option 1:
+Option 1:
 
 Run the Jupyter Notebook in JupyterHub. Run each cell in sequence to see the final visuals. 
 
-#Option 2:
+Option 2:
 
 Run the simulation in Python and manually view the sim_out.csv data. Thise data is what is used to construct the Jupyter visuals.
-
-For  both options, input the number of days to run, the percentage of the population infected at day 0, and the number of days the disease lasts for.
-
 
 ```
 python3 simulator.py
 ```
+
+For  both options, input the number of days to run, the percentage of the population infected at day 0, and the number of days the disease lasts for.
+
+
