@@ -1,8 +1,27 @@
+"""
+CPSC 571 F21 Project 
+
+Authors: 
+Erin Paslawski 10099039
+Peter Nguyen 10096424
+Bohyeon Cha 10162219
+
+December 23 2021
+
+Disease Spread Simulator
+"""
+
 from utilities import *
 from person import *
 import csv
 import random 
 
+
+'''
+Class Division
+
+This class defines each division which is created using census data
+'''
 class Division:
 
     def __init__(self, name, population, age_0_4, age_5_9, age_10_14,\
@@ -23,9 +42,6 @@ class Division:
         self.households = households    
         self.residents = residents
         
-
-
-
 
 def initialize_divisions(init_infection_pct):
     '''
@@ -81,9 +97,6 @@ def initialize_divisions(init_infection_pct):
             
             
     return divisions
-
-
-
 
 
 def generate_residents(num_infected, name, emp_rate, workplaces, households, age_0_4, age_5_9, age_10_14, age_15_19, age_20_64, age_65, pop_density):
