@@ -6,8 +6,8 @@ Created: December 2021
 
 ## Authors
 
-Erin Paslawski 
-Peter Nguyen 
+Erin Paslawski,
+Peter Nguyen,
 Bohyeon Cha 
 
 ## Installation
