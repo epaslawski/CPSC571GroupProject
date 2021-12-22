@@ -31,7 +31,7 @@ Run the Jupyter Notebook in JupyterHub. Run each cell in sequence to see the fin
 
 Option 2:
 
-Run the simulation in Python and manually view the sim_out.csv data. Thise data is what is used to construct the Jupyter visuals.
+Run the simulation in Python and manually view the sim_out.csv data. This data is what is used to construct the Jupyter visuals.
 
 ```
 python3 simulator.py
