@@ -1,3 +1,16 @@
+"""
+CPSC 571 F21 Project 
+
+Authors: 
+Erin Paslawski 10099039
+Peter Nguyen 10096424
+Bohyeon Cha 10162219
+
+December 23 2021
+
+Disease Spread Simulator
+"""
+
 from os import times_result
 from scipy.stats import norm
 import random
@@ -10,7 +23,9 @@ from utilities import *
 import csv
 
 
-
+'''
+Method to run an individual day for one division
+'''
 def run_day(div, day, infected_days):
     name = div.name
     res_total = len(div.residents)
@@ -60,6 +75,10 @@ def run_day(div, day, infected_days):
             recover += 1
     return [name, day, active,res_total, new, recover]
 
+
+'''
+Runs the simulator for each division
+'''
 def main():
 
     # create output csv
@@ -79,8 +98,6 @@ def main():
         for x in range(0,sim_days):
             for div in ds:
                 data = run_day(div, x, infected_days)
-                if (div.name == 1):
-                    print(data)
                 writer.writerow(data)
 
 if __name__ == "__main__":

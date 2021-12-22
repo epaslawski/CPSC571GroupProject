@@ -1,3 +1,16 @@
+"""
+CPSC 571 F21 Project 
+
+Authors: 
+Erin Paslawski 10099039
+Peter Nguyen 10096424
+Bohyeon Cha 10162219
+
+December 23 2021
+
+Disease Spread Simulator
+"""
+
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split

@@ -1,4 +1,21 @@
+"""
+CPSC 571 F21 Project 
 
+Authors: 
+Erin Paslawski 10099039
+Peter Nguyen 10096424
+Bohyeon Cha 10162219
+
+December 23 2021
+
+Disease Spread Simulator
+"""
+
+'''
+Class Person
+
+This class defines a person object and their attributes
+'''
 class Person:
 
     def __init__(self, age, works, household, workplace, division, contagious_rating):
